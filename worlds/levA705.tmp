@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2wmhp3fgsj5e"]
+
+[ext_resource type="PackedScene" uid="uid://tnodb627263s" path="res://tile_map.tscn" id="1_p1pbo"]
+[ext_resource type="Script" path="res://worlds/level1.gd" id="1_p4h0c"]
+[ext_resource type="PackedScene" uid="uid://ct4jjgheukpdj" path="res://spike.tscn" id="2_1fhpr"]
+[ext_resource type="PackedScene" uid="uid://bh023iopmslpj" path="res://player.tscn" id="2_mrpvi"]
+[ext_resource type="PackedScene" uid="uid://1qidmvuxojax" path="res://hotbar.tscn" id="6_w3fgb"]
+[ext_resource type="PackedScene" uid="uid://cd7gxkya6ytfb" path="res://play_button.tscn" id="7_fuufn"]
+
+[node name="world" type="Node2D"]
+position = Vector2(0, 64)
+script = ExtResource("1_p4h0c")
+
+[node name="TileMap" parent="." instance=ExtResource("1_p1pbo")]
+position = Vector2(0, -64)
+layer_0/tile_data = PackedInt32Array(0, 327680, 0, 1, 65536, 0, 2, 65536, 0, 3, 131072, 0, 65539, 0, 1, 65540, 65536, 0, 65541, 65536, 0, 65542, 65536, 0, 65543, 131072, 1, 7, 0, 0, 8, 65536, 0, 9, 65536, 0, 10, 393216, 0, 65538, 0, 2, 65544, 131072, 2)
+
+[node name="spike" parent="." instance=ExtResource("2_1fhpr")]
+position = Vector2(512, 64)
+
+[node name="spike2" parent="." instance=ExtResource("2_1fhpr")]
+position = Vector2(576, 64)
+
+[node name="spike3" parent="." instance=ExtResource("2_1fhpr")]
+position = Vector2(640, 64)
+
+[node name="spike4" parent="." instance=ExtResource("2_1fhpr")]
+position = Vector2(704, 64)
+
+[node name="spike5" parent="." instance=ExtResource("2_1fhpr")]
+position = Vector2(768, 64)
+
+[node name="spike6" parent="." instance=ExtResource("2_1fhpr")]
+position = Vector2(832, 64)
+
+[node name="player" parent="." instance=ExtResource("2_mrpvi")]
+position = Vector2(128, -256)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="hotbar" parent="CanvasLayer" instance=ExtResource("6_w3fgb")]
+
+[node name="Play_button" parent="CanvasLayer" instance=ExtResource("7_fuufn")]
+offset_left = 576.0
+offset_top = 576.0
+offset_right = 680.0
+offset_bottom = 680.0

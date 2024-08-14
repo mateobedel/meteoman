@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://d30y8gu7k146w"]
+
+[ext_resource type="Script" path="res://worlds/level1.gd" id="1_hpek6"]
+[ext_resource type="TileSet" uid="uid://r6ql60oek4kh" path="res://TILE_SET.tres" id="2_bsb3s"]
+[ext_resource type="Script" path="res://scenes/tile_map.gd" id="3_hw185"]
+[ext_resource type="PackedScene" uid="uid://bh023iopmslpj" path="res://scenes/player.tscn" id="4_n5qq5"]
+[ext_resource type="PackedScene" uid="uid://ct4jjgheukpdj" path="res://scenes/spike.tscn" id="5_wfv2r"]
+[ext_resource type="PackedScene" uid="uid://b05hpfcp0mp7j" path="res://scenes/jambes.tscn" id="6_bybce"]
+[ext_resource type="Script" path="res://scenes/hotbar.gd" id="7_v6327"]
+[ext_resource type="PackedScene" uid="uid://cd7gxkya6ytfb" path="res://scenes/play_button.tscn" id="8_ekqgu"]
+[ext_resource type="PackedScene" uid="uid://cnyv4sgdmcy38" path="res://scenes/circle_trans.tscn" id="9_crbp2"]
+
+[node name="level2" type="Node2D"]
+position = Vector2(0, 64)
+script = ExtResource("1_hpek6")
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1000
+position = Vector2(0, -64)
+tile_set = ExtResource("2_bsb3s")
+format = 2
+layer_0/tile_data = PackedInt32Array(4, 393216, 2, 5, 65536, 0, 6, 393216, 1, 9, 327680, 2, 65545, 131072, 1, 65544, 65536, 0, 65543, 65536, 0, -65527, 131072, 0, -65528, 65536, 0, -65529, 65536, 0, -65536, 0, 0, -65535, 65536, 0, -65534, 65536, 0, -65533, 65536, 0, 65539, 65536, 0, 65538, 65536, 0, 65537, 65536, 0, 65536, 0, 1, 0, 327680, 2, 1, 65536, 4, -65532, 131072, 0, -65530, 0, 0, 8, 0, 4, 7, 65536, 4, 3, 0, 4, 65540, 131072, 1, 65542, 0, 1, 65541, 196608, 4)
+script = ExtResource("3_hw185")
+
+[node name="player" parent="." instance=ExtResource("4_n5qq5")]
+position = Vector2(64, -192)
+
+[node name="spikes" type="Node2D" parent="."]
+position = Vector2(512, -64)
+
+[node name="spike3" parent="spikes" instance=ExtResource("5_wfv2r")]
+position = Vector2(128, 0)
+
+[node name="spike4" parent="spikes" instance=ExtResource("5_wfv2r")]
+position = Vector2(192, 0)
+
+[node name="jambes" parent="." instance=ExtResource("6_bybce")]
+position = Vector2(960, -256)
+niveau_suivant = "res://worlds/level8.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="hotbar" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("7_v6327")
+inventory = {
+0: 2,
+1: 0,
+2: 1
+}
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/hotbar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 10
+
+[node name="Play_button" parent="CanvasLayer" instance=ExtResource("8_ekqgu")]
+offset_left = 576.0
+offset_top = 576.0
+offset_right = 680.0
+offset_bottom = 680.0
+
+[node name="circle_trans" parent="CanvasLayer" instance=ExtResource("9_crbp2")]

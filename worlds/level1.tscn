@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2wmhp3fgsj5e"]
+
+[ext_resource type="PackedScene" uid="uid://tnodb627263s" path="res://scenes/tile_map.tscn" id="1_p1pbo"]
+[ext_resource type="Script" path="res://worlds/level1.gd" id="1_p4h0c"]
+[ext_resource type="PackedScene" uid="uid://bh023iopmslpj" path="res://scenes/player.tscn" id="2_mrpvi"]
+[ext_resource type="Script" path="res://scenes/hotbar.gd" id="3_27h6l"]
+[ext_resource type="PackedScene" uid="uid://b05hpfcp0mp7j" path="res://scenes/jambes.tscn" id="3_ny1pc"]
+[ext_resource type="PackedScene" uid="uid://cnyv4sgdmcy38" path="res://scenes/circle_trans.tscn" id="6_yr0fy"]
+[ext_resource type="PackedScene" uid="uid://cd7gxkya6ytfb" path="res://scenes/play_button.tscn" id="7_fuufn"]
+
+[node name="level1" type="Node2D"]
+position = Vector2(0, 64)
+script = ExtResource("1_p4h0c")
+
+[node name="TileMap" parent="." instance=ExtResource("1_p1pbo")]
+position = Vector2(0, -64)
+layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 65536, 0, -65534, 65536, 0, -65533, 65536, 0, -65532, 65536, 0, -65531, 65536, 0, -65530, 65536, 0, -65529, 262144, 2, -65528, 65536, 0, 65544, 65536, 0, 65543, 65536, 0, 65542, 65536, 0, 65541, 65536, 0, 65540, 65536, 0, 65539, 65536, 0, 65538, 65536, 0, 65537, 65536, 0, 65536, 0, 1, 0, 327680, 2, -65527, 131072, 0, 9, 327680, 2, 65545, 131072, 1, 8, 0, 4, 1, 65536, 4)
+
+[node name="player" parent="." instance=ExtResource("2_mrpvi")]
+position = Vector2(64, -192)
+
+[node name="jambes" parent="." instance=ExtResource("3_ny1pc")]
+position = Vector2(1088, -256)
+niveau_suivant = "res://worlds/level3.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="hotbar" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_27h6l")
+inventory = {
+0: 1,
+1: 0,
+2: 0,
+3: 0
+}
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/hotbar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 10
+
+[node name="Play_button" parent="CanvasLayer" instance=ExtResource("7_fuufn")]
+offset_left = 576.0
+offset_top = 576.0
+offset_right = 680.0
+offset_bottom = 680.0
+
+[node name="circle_trans" parent="CanvasLayer" instance=ExtResource("6_yr0fy")]
