@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://o8t3g4aq58ue"]
+
+[ext_resource type="Texture2D" uid="uid://d3rx0frongvke" path="res://texture/icon_rain.png" id="1_sn7u4"]
+[ext_resource type="Script" path="res://scenes/hotbar_button.gd" id="2_3rofc"]
+[ext_resource type="FontFile" uid="uid://b6g0no18hvrbt" path="res://upheavtt.ttf" id="3_o0ha7"]
+
+[node name="Button" type="Button"]
+offset_right = 104.0
+offset_bottom = 104.0
+icon = ExtResource("1_sn7u4")
+script = ExtResource("2_3rofc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 77.0
+offset_right = 102.0
+offset_bottom = 102.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("3_o0ha7")
+theme_override_font_sizes/font_size = 24
+text = "99"
+horizontal_alignment = 2
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

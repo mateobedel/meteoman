@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b05hpfcp0mp7j"]
+
+[ext_resource type="Script" path="res://scenes/jambes.gd" id="1_7rajo"]
+[ext_resource type="Texture2D" uid="uid://cyygdcuc38qrm" path="res://texture/jambe.png" id="1_32knh"]
+[ext_resource type="AudioStream" uid="uid://omo7uektghwi" path="res://sound/win.wav" id="3_lygxj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghsol"]
+size = Vector2(64, 96)
+
+[node name="jambes" type="Area2D"]
+script = ExtResource("1_7rajo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_32knh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_ghsol")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lygxj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd7gxkya6ytfb"]
+
+[ext_resource type="Texture2D" uid="uid://bw7y2yaw3h4dw" path="res://texture/play.png" id="1_qmvgl"]
+[ext_resource type="Script" path="res://scenes/Play_button.gd" id="2_7idx4"]
+
+[node name="Play_button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+icon = ExtResource("1_qmvgl")
+script = ExtResource("2_7idx4")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

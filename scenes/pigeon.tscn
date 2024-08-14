@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6o36bjomocal"]
+
+[ext_resource type="Texture2D" uid="uid://c47buy1oax3o7" path="res://texture/piegeon1.png" id="1_1l438"]
+[ext_resource type="Script" path="res://scenes/pigeon.gd" id="1_1phxn"]
+[ext_resource type="Texture2D" uid="uid://7ekrhcfs6yxi" path="res://texture/piegeonmort.png" id="2_iredg"]
+[ext_resource type="Texture2D" uid="uid://cloxitqlj65g7" path="res://texture/piegeon2.png" id="2_p1jbr"]
+[ext_resource type="AudioStream" uid="uid://ccj5x2vdi67p" path="res://sound/explosion.wav" id="2_u7l7v"]
+[ext_resource type="Texture2D" uid="uid://b3lt5ba66hvyb" path="res://texture/bouton.png" id="4_rig6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lw4t"]
+size = Vector2(128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hsupb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iredg")
+}],
+"loop": true,
+"name": &"mort",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1l438")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p1jbr")
+}],
+"loop": true,
+"name": &"vol",
+"speed": 3.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_unqb1"]
+colors = PackedColorArray(0.511719, 0.542969, 0.644531, 1, 0.584314, 0.611765, 0.698039, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c5x3m"]
+gradient = SubResource("Gradient_unqb1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jn1m4"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 300, 0)
+initial_velocity_min = 84.75
+initial_velocity_max = 265.54
+angular_velocity_min = -40.68
+angular_velocity_max = 48.82
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -720.0
+angle_max = 720.0
+scale_min = 4.0
+scale_max = 15.0
+color_ramp = SubResource("GradientTexture1D_c5x3m")
+
+[node name="pigeon" type="Area2D"]
+script = ExtResource("1_1phxn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8lw4t")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_u7l7v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hsupb")
+animation = &"vol"
+autoplay = "vol"
+speed_scale = 0.0
+
+[node name="Button2" type="Button" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+icon = ExtResource("4_rig6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_jn1m4")
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 5
+trail_section_subdivisions = 6
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="." to="." method="_on_area_shape_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]
+[connection signal="button_up" from="Button2" to="." method="_on_button_2_button_up"]
+[connection signal="gui_input" from="Button2" to="." method="_on_button_2_gui_input"]

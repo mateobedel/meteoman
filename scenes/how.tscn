@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr1fg66s8xyv3"]
+
+[ext_resource type="Texture2D" uid="uid://d3tegk560dj5v" path="res://texture/how.png" id="1_4pclu"]
+[ext_resource type="Script" path="res://scenes/how.gd" id="1_jlpqj"]
+[ext_resource type="StyleBox" uid="uid://lxll2oscwtud" path="res://boutton.tres" id="2_mvg5i"]
+[ext_resource type="FontFile" uid="uid://cr4udgdccu40h" path="res://texture/coolvetica rg.otf" id="3_75fwn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_284kc"]
+bg_color = Color(0.972549, 0, 0.423529, 1)
+border_color = Color(0.368627, 0.0392157, 0.294118, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0.0627451, 0.00392157, 0.101961, 0.188235)
+shadow_size = 4
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="Theme" id="Theme_w05nr"]
+default_font = ExtResource("3_75fwn")
+default_font_size = 60
+Button/styles/hover = SubResource("StyleBoxFlat_284kc")
+Button/styles/normal = ExtResource("2_mvg5i")
+Button/styles/pressed = SubResource("StyleBoxFlat_284kc")
+
+[node name="how" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -416.0
+offset_top = -288.0
+offset_right = -376.0
+offset_bottom = -248.0
+scale = Vector2(0.536845, 0.536845)
+script = ExtResource("1_jlpqj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -417.253
+offset_top = -59.6075
+offset_right = 1765.75
+offset_bottom = 1007.39
+scale = Vector2(0.967988, 0.967988)
+texture = ExtResource("1_4pclu")
+
+[node name="back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1430.58
+offset_top = 1013.33
+offset_right = 1851.58
+offset_bottom = 1131.33
+theme = SubResource("Theme_w05nr")
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+text = "Back"
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

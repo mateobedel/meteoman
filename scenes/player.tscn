@@ -1,0 +1,99 @@
+[gd_scene load_steps=16 format=3 uid="uid://bh023iopmslpj"]
+
+[ext_resource type="Texture2D" uid="uid://cf06mbndqcnrc" path="res://texture/player.png" id="1_ma0em"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_ouefg"]
+[ext_resource type="Texture2D" uid="uid://cx8imqpibqseq" path="res://texture/mort/mort 0.png" id="3_jmijf"]
+[ext_resource type="Texture2D" uid="uid://ck5w1vqe0duga" path="res://texture/mort/mort 1.png" id="4_6y0ok"]
+[ext_resource type="Texture2D" uid="uid://db5qu8ohex8vj" path="res://texture/mort/mort 3.png" id="5_w5fab"]
+[ext_resource type="Texture2D" uid="uid://cmp3y6ucdqbha" path="res://texture/mort/mort 4.png" id="6_qxtbq"]
+[ext_resource type="Texture2D" uid="uid://bivjgecgi1sct" path="res://texture/mort/mort 5.png" id="7_04u5u"]
+[ext_resource type="Texture2D" uid="uid://4jpbk8ioam6u" path="res://texture/mort/mort 6.png" id="8_75i8j"]
+[ext_resource type="Texture2D" uid="uid://cm0i1eee7re6j" path="res://texture/mort/mort 7.png" id="9_4risi"]
+[ext_resource type="AudioStream" uid="uid://bqqql78hyjh56" path="res://sound/WIND.wav" id="11_8bjqk"]
+[ext_resource type="AudioStream" uid="uid://dta0xsp4hjbj5" path="res://sound/TORNADO.wav" id="12_oumar"]
+[ext_resource type="AudioStream" uid="uid://gs0k5ws15cms" path="res://sound/death.wav" id="13_t67uw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pm002"]
+radius = 41.0
+height = 100.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1of5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jmijf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6y0ok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w5fab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qxtbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_04u5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_75i8j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4risi")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_sotor"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="player" type="CharacterBody2D"]
+z_index = -100
+script = ExtResource("1_ouefg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(53, -54)
+texture = ExtResource("1_ma0em")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(54, -50)
+shape = SubResource("CapsuleShape2D_pm002")
+
+[node name="mort_sprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(64, -64)
+sprite_frames = SubResource("SpriteFrames_e1of5")
+frame = 6
+frame_progress = 1.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(64, 0)
+emitting = false
+amount = 10
+lifetime = 2.0
+direction = Vector2(-1, -0.5)
+spread = 9.3
+gravity = Vector2(0, 200)
+initial_velocity_min = 183.91
+initial_velocity_max = 298.0
+damping_min = 37.844
+damping_max = 100.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 3.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_sotor")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="wind_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_8bjqk")
+volume_db = -15.0
+
+[node name="tornado_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_oumar")
+
+[node name="death_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_t67uw")

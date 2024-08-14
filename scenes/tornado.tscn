@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://cu24k3f4y0qiu"]
+
+[ext_resource type="Script" path="res://scenes/tornado.gd" id="1_dkea5"]
+[ext_resource type="Texture2D" uid="uid://dy4k0mqvvldai" path="res://texture/tornado1.png" id="1_e5h6k"]
+[ext_resource type="Texture2D" uid="uid://dmxy6nsib5dou" path="res://texture/tornado2.png" id="2_riu8e"]
+[ext_resource type="Texture2D" uid="uid://b3lt5ba66hvyb" path="res://texture/bouton.png" id="4_xvd28"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oly3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e5h6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_riu8e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3exj"]
+size = Vector2(256, 256)
+
+[node name="tornado" type="Area2D"]
+script = ExtResource("1_dkea5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oly3o")
+autoplay = "default"
+frame_progress = 0.168745
+speed_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w3exj")
+
+[node name="Button2" type="Button" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+icon = ExtResource("4_xvd28")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="." to="." method="_on_area_shape_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]
+[connection signal="button_up" from="Button2" to="." method="_on_button_2_button_up"]
+[connection signal="gui_input" from="Button2" to="." method="_on_button_2_gui_input"]

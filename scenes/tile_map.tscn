@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://tnodb627263s"]
+
+[ext_resource type="TileSet" uid="uid://r6ql60oek4kh" path="res://TILE_SET.tres" id="1_df2bm"]
+[ext_resource type="Script" path="res://scenes/tile_map.gd" id="2_xjppw"]
+
+[node name="TileMap" type="TileMap"]
+z_index = -1000
+tile_set = ExtResource("1_df2bm")
+format = 2
+script = ExtResource("2_xjppw")

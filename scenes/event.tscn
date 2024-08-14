@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwk7k4biuhw41"]
+
+[ext_resource type="Script" path="res://scenes/event.gd" id="1_ewgi4"]
+[ext_resource type="AudioStream" uid="uid://dovnlh62ew4hh" path="res://sound/ITEM.wav" id="2_k4mux"]
+[ext_resource type="AudioStream" uid="uid://bmunmahj27lkm" path="res://sound/CLICK.wav" id="3_jad0v"]
+[ext_resource type="AudioStream" uid="uid://cf04vwdenagdb" path="res://sound/place.wav" id="4_jtqdl"]
+[ext_resource type="AudioStream" uid="uid://d0ycmom70mta8" path="res://sound/delete.wav" id="5_atq8k"]
+[ext_resource type="AudioStream" uid="uid://cgoqxkxx5dt1q" path="res://sound/Juhani Junkala [Chiptune Adventures] 4. Stage Select.ogg" id="6_qxvjw"]
+[ext_resource type="FontFile" uid="uid://cr4udgdccu40h" path="res://texture/coolvetica rg.otf" id="7_icyfi"]
+
+[node name="Event" type="Node2D"]
+script = ExtResource("1_ewgi4")
+
+[node name="item" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_k4mux")
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jad0v")
+
+[node name="place" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jtqdl")
+
+[node name="delete" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_atq8k")
+
+[node name="theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qxvjw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 1186.0
+offset_top = -2.0
+offset_right = 1321.0
+offset_bottom = 78.0
+theme_override_fonts/font = ExtResource("7_icyfi")
+theme_override_font_sizes/font_size = 32
+text = "00:00"

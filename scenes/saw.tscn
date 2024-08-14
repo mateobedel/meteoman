@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://drxfxxtxrbp4a"]
+
+[ext_resource type="Script" path="res://scenes/Area2D.gd" id="1_31p4s"]
+[ext_resource type="Texture2D" uid="uid://capwcm4ufkqdb" path="res://texture/saw.png" id="2_tswoe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oxacb"]
+radius = 96.0
+
+[node name="saw" type="Area2D"]
+script = ExtResource("1_31p4s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tswoe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oxacb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

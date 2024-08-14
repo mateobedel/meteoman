@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://rc2fnrueffj7"]
+
+[ext_resource type="Texture2D" uid="uid://2fvtuqoe8t31" path="res://texture/rain.png" id="1_cktl0"]
+[ext_resource type="Script" path="res://scenes/rain.gd" id="1_ifny1"]
+[ext_resource type="Texture2D" uid="uid://bd8felh71gmd4" path="res://texture/rain_cloud.png" id="3_xr5j4"]
+[ext_resource type="Texture2D" uid="uid://b3lt5ba66hvyb" path="res://texture/bouton.png" id="4_53iqr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hd4f2"]
+size = Vector2(116, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jc7nh"]
+resource_local_to_scene = true
+size = Vector2(128, 128)
+
+[node name="rain" type="Area2D"]
+script = ExtResource("1_ifny1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_hd4f2")
+
+[node name="water" type="Area2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="water"]
+target_position = Vector2(0, 3000)
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="water"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_jc7nh")
+
+[node name="TextureRect" type="TextureRect" parent="water"]
+self_modulate = Color(1, 1, 1, 0.537255)
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 128.0
+texture = ExtResource("1_cktl0")
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="water"]
+offset_left = -55.0
+offset_right = 56.0
+offset_bottom = 128.0
+color = Color(0, 0.654902, 0.996078, 0.117647)
+
+[node name="Timer" type="Timer" parent="water"]
+wait_time = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_xr5j4")
+
+[node name="Button" type="Button" parent="."]
+z_index = 50
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+icon = ExtResource("4_53iqr")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="." to="." method="_on_area_shape_exited"]
+[connection signal="body_entered" from="water" to="." method="_on_water_body_entered"]
+[connection signal="body_exited" from="water" to="." method="_on_water_body_exited"]
+[connection signal="timeout" from="water/Timer" to="." method="_on_timer_timeout"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]

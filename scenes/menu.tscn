@@ -1,0 +1,146 @@
+[gd_scene load_steps=13 format=3 uid="uid://bi4uyy0n2stda"]
+
+[ext_resource type="Script" path="res://scenes/menu.gd" id="1_vcbuq"]
+[ext_resource type="Texture2D" uid="uid://2fvtuqoe8t31" path="res://texture/rain.png" id="2_bc7s7"]
+[ext_resource type="Texture2D" uid="uid://dc2b4kwobnevp" path="res://texture/meteoman.png" id="3_wn5bw"]
+[ext_resource type="Script" path="res://scenes/TextureRect.gd" id="4_ttnl7"]
+[ext_resource type="StyleBox" uid="uid://lxll2oscwtud" path="res://boutton.tres" id="5_b472g"]
+[ext_resource type="FontFile" uid="uid://cr4udgdccu40h" path="res://texture/coolvetica rg.otf" id="6_dbdic"]
+[ext_resource type="PackedScene" uid="uid://cnyv4sgdmcy38" path="res://scenes/circle_trans.tscn" id="7_iww5d"]
+
+[sub_resource type="Animation" id="Animation_rafhb"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_oxs4l"]
+resource_name = "troississe"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.6, 0.0690856, 7.04444, -0.4, -0.0486088, 0.25, 0, 6.28319, -0.7, -0.381049, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vl81r"]
+_data = {
+"RESET": SubResource("Animation_rafhb"),
+"troississe": SubResource("Animation_oxs4l")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlbwc"]
+content_margin_left = 150.0
+content_margin_top = 0.0
+content_margin_right = 150.0
+content_margin_bottom = 0.0
+bg_color = Color(0.972549, 0, 0.423529, 1)
+border_color = Color(0.368627, 0.0392157, 0.294118, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0.0627451, 0.00392157, 0.101961, 0.188235)
+shadow_size = 4
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="Theme" id="Theme_0ytu2"]
+default_font = ExtResource("6_dbdic")
+default_font_size = 64
+Button/styles/hover = SubResource("StyleBoxFlat_qlbwc")
+Button/styles/normal = ExtResource("5_b472g")
+Button/styles/pressed = SubResource("StyleBoxFlat_qlbwc")
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 160.0
+offset_bottom = 160.0
+script = ExtResource("1_vcbuq")
+
+[node name="bg" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.521569)
+layout_mode = 0
+offset_left = -768.0
+offset_top = -672.0
+offset_right = 768.0
+offset_bottom = 352.0
+texture = ExtResource("2_bc7s7")
+stretch_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -640.0
+offset_top = -576.0
+offset_right = 642.0
+offset_bottom = 62.0
+scale = Vector2(0.509736, 0.509736)
+pivot_offset = Vector2(627.776, 251.11)
+texture = ExtResource("3_wn5bw")
+script = ExtResource("4_ttnl7")
+
+[node name="Timer" type="Timer" parent="TextureRect"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+libraries = {
+"": SubResource("AnimationLibrary_vl81r")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = -224.0
+offset_top = -128.0
+offset_right = 184.0
+offset_bottom = 214.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0ytu2")
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+text = "Play"
+
+[node name="how" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0ytu2")
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+text = "How"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 611.0
+offset_bottom = 175.0
+theme_override_fonts/font = ExtResource("6_dbdic")
+theme_override_font_sizes/font_size = 32
+text = "♫ Juhani Junkala"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="circle_trans" parent="CanvasLayer" instance=ExtResource("7_iww5d")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TextureRect/Timer" to="TextureRect" method="_on_timer_timeout"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/how" to="." method="_on_how_pressed"]
